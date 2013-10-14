@@ -31,7 +31,7 @@ public:
     void show();                    /* primitive show-function */
     void clear();
 
-private:
+private:                    /*эти функции вообще нужно выкинуть из класса, по-хорошему, и реализовывать только в .cpp */
     void insertFixup(Node *x);
     void deleteFixup(Node *x);
     void rotateLeft(Node *x);
