@@ -17,7 +17,7 @@ RedBlackTree::~RedBlackTree()
 
 void DFS(Node *node, std::queue<T> &q)  /*DFS = Depth-first search, DFS returns to us a queue with all data of tree*/
 {
-    if (node->left != NIL)
+    if (node->left != NIL)              /*да, работать с DFS - кастыльно, но пока что так*/
         DFS(node->left, q);
 
     q.push(node->data);
