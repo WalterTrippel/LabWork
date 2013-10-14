@@ -1,0 +1,42 @@
+#ifndef REDBLACKTREE_H_INCLUDED
+#define REDBLACKTREE_H_INCLUDED
+
+typedef int T;                  /* type of item to be stored */
+
+typedef enum { BLACK, RED } nodeColor; /* Red-Black tree description */
+
+struct Node
+{
+    struct Node *left;         /* left child */
+    struct Node *right;        /* right child */
+    struct Node *parent;       /* parent */
+    nodeColor color;            /* node color (BLACK, RED) */
+    T data;                     /* data stored in node */
+};
+
+class RedBlackTree
+{
+public:
+    RedBlackTree();
+    ~RedBlackTree();
+    RedBlackTree(const RedBlackTree &original);
+    RedBlackTree &operator=(const RedBlackTree &right);
+    RedBlackTree operator+(const RedBlackTree &right) const;    /* sum of sets */
+    RedBlackTree operator-(const RedBlackTree &right) const;    /* diference of sets */
+    RedBlackTree operator^(const RedBlackTree &right);          /* intersection of sets */
+
+    Node* findNode(T data);
+    void insertNode(T data);
+    void deleteNode(Node *z);
+    void show();                    /* primitive show-function */
+    void clear();
+
+private:
+    void insertFixup(Node *x);
+    void deleteFixup(Node *x);
+    void rotateLeft(Node *x);
+    void rotateRight(Node *x);
+    Node *root;                 /* root of Red-Black tree */
+};
+
+#endif // REDBLACKTREE_H_INCLUDED
