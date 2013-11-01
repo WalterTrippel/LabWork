@@ -17,7 +17,11 @@ RedBlackTree::~RedBlackTree()
 
 void DFS(Node *node, std::queue<T> &q)  /*DFS = Depth-first search, DFS returns to us a queue with all data of tree*/
 {
+<<<<<<< HEAD
     if (node->left != NIL)
+=======
+    if (node->left != NIL)              /*да, работать с DFS - кастыльно, но пока что так*/
+>>>>>>> 7ca7db9168afd7699d340e3d5e1df8b6997ca39a
         DFS(node->left, q);
 
     q.push(node->data);
@@ -26,6 +30,7 @@ void DFS(Node *node, std::queue<T> &q)  /*DFS = Depth-first search, DFS returns 
         DFS(node->right, q);
 }
 
+<<<<<<< HEAD
 
 void DFS4(Node *&node, void (*toDo)(Node *&current) )
 {
@@ -91,6 +96,8 @@ void cout(Node *current)
 *
 */
 /*
+=======
+>>>>>>> 7ca7db9168afd7699d340e3d5e1df8b6997ca39a
 void RedBlackTree::clear()
 {
     std::queue<T> q;
@@ -102,8 +109,12 @@ void RedBlackTree::clear()
         q.pop();
     }
 }
+<<<<<<< HEAD
 */
 /*
+=======
+
+>>>>>>> 7ca7db9168afd7699d340e3d5e1df8b6997ca39a
 RedBlackTree::RedBlackTree(const RedBlackTree &original)
 {
     std::queue<T> q;
@@ -115,6 +126,7 @@ RedBlackTree::RedBlackTree(const RedBlackTree &original)
         q.pop();
     }
 }
+<<<<<<< HEAD
 */
 
 void copy()
@@ -142,6 +154,10 @@ RedBlackTree &RedBlackTree::operator=(const RedBlackTree &right)
     return *this;
 }
 */
+=======
+
+
+>>>>>>> 7ca7db9168afd7699d340e3d5e1df8b6997ca39a
 RedBlackTree &RedBlackTree::operator=(const RedBlackTree &right)
 {
     this->clear();
@@ -210,7 +226,10 @@ RedBlackTree RedBlackTree::operator^(const RedBlackTree &right)
     return temp;
 }
 
+<<<<<<< HEAD
 /*
+=======
+>>>>>>> 7ca7db9168afd7699d340e3d5e1df8b6997ca39a
 void RedBlackTree::show()
 {
     std::queue<T> q;
@@ -222,11 +241,15 @@ void RedBlackTree::show()
     }
     std::cout<<"\n";
 }
+<<<<<<< HEAD
 */
 void RedBlackTree::show()
 {
  DFS2(root,cout);
 }
+=======
+
+>>>>>>> 7ca7db9168afd7699d340e3d5e1df8b6997ca39a
 
 Node *RedBlackTree::findNode(T data)
 {
