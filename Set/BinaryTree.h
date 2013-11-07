@@ -8,8 +8,6 @@ typedef int T;
 class SBT: public Tree {
 
 public:
-    class Iterator;
-    typedef Iterator iterator;
     SBT();
     ~SBT();
     bool findNode(T key);

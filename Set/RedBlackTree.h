@@ -15,6 +15,7 @@ struct Node {
     T data;                     /* data stored in node */
 };
 
+
 class RedBlackTree: public Tree {
 public:
 
@@ -23,15 +24,24 @@ public:
 
     RedBlackTree();
     ~RedBlackTree();
-    // RedBlackTree(const RedBlackTree &original);
-    bool findNode(T key);
-    void insertNode(T data);
-    void deleteNode(T key);
-    void clear();
+    //RedBlackTree(const RedBlackTree &original);
+    //RedBlackTree &operator=(RedBlackTree &original);
+
+    bool findImpl(T key);
+    void insertImpl(T data);
+    void insertImpl(void *pointer);
+    void removeImpl(T key);
+    void clearImpl();
     void show();
 
-    Iterator begin();
-    Iterator end();
+    //Iterator begin();
+    //Iterator end();
+
+    void *beginImpl() const;
+    void *endImpl() const;
+
+    T &asteriscImpl(void *pointer) const;
+    void nextImpl(void *&pointer) const;
 
 private:
 
@@ -49,6 +59,7 @@ private:
 
 };
 
+/*
 class RedBlackTree::Iterator {
 public:
     Iterator();
@@ -66,7 +77,7 @@ public:
 private:
     Node *current;
 };
-
+*/
 
 
 #endif // REDBLACKTREE_H_INCLUDED

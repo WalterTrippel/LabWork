@@ -5,23 +5,23 @@
 
 typedef int T;
 
-class Set{
+class Set {
 public:
     Set(Tree *container);
-    //~Set();
-    //Set(const Set &original);
+
     void addElement(T newElement);
     bool findElement(T value);
     void deleteElemenet(T value);
 
     Set &operator=(const Set &right);
-    Set operator+(const Set &right) const;
-    Set operator-(const Set &right) const;
-    Set operator^(const Set &right) const;
+    Set operator+(Set &right);
+    Set operator-(Set &right);
+    Set operator^(Set &right);
 
+    void clear();
     void show();
 private:
-    int numberOfElements;
+    Set();
     Tree *container;
 };
 

@@ -10,10 +10,11 @@ RedBlackTree::RedBlackTree():
 }
 
 RedBlackTree::~RedBlackTree() {
-    clear();
+    clearImpl();
 }
 
-bool RedBlackTree::findNode(T key) {
+
+bool RedBlackTree::findImpl(T key) {
     Node *current = root;
     while(current != NIL)
         if(key == current->data)
@@ -24,7 +25,15 @@ bool RedBlackTree::findNode(T key) {
     return 0;
 }
 
-void RedBlackTree::insertNode(T data) {
+void RedBlackTree::insertImpl(void *pointer) {
+    if(pointer) {
+        Node *unpacked = (Node*)pointer;
+        this->insertImpl(unpacked->data);
+    }
+}
+
+
+void RedBlackTree::insertImpl(T data) {
     Node *current, *parent, *x;
 
     /* find where node belongs */
@@ -106,7 +115,7 @@ void RedBlackTree::insertFixup(Node *x) {
     root->color = BLACK;
 }
 
-void RedBlackTree::deleteNode(T key) {
+void RedBlackTree::removeImpl(T key) {
 
     Node *z = root;
     while(z != NIL)
@@ -256,7 +265,7 @@ void RedBlackTree::rotateRight(Node *x) {
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-
+/*
 RedBlackTree::Iterator::Iterator():
     current(0) {
 }
@@ -268,7 +277,7 @@ RedBlackTree::Iterator::Iterator(Node *node):
 RedBlackTree::Iterator::~Iterator() {
     current = 0;
 }
-/*
+
 Iterator::Iterator(const Iterator &original) {
     *current = *(original.current);
 }
@@ -277,7 +286,7 @@ Iterator &Iterator::operator=(const Iterator &right) {
     *current = *(right.current);
     return *this;
 }
-*/
+
 T &RedBlackTree::Iterator::operator *() const {
     return this->current->data;
 }
@@ -341,7 +350,63 @@ bool RedBlackTree::Iterator::operator==(const Iterator &right) const {
 bool RedBlackTree::Iterator::operator!=(const Iterator &right) const {
     return current != right.current;
 }
+*/
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+
+void * RedBlackTree::beginImpl() const {
+    Node *current = root;
+
+    if(current)
+        while(current->left != NIL)
+            current = current->left;
+
+    return (void*)current;
+}
+
+void * RedBlackTree::endImpl() const {
+
+    return (void*)0;
+}
+
+T & RedBlackTree::asteriscImpl(void *pointer) const {
+    if(pointer)
+        return ((Node *)pointer)->data;
+    else
+        throw "Fatal Error in astercsImpl";
+}
+
+void RedBlackTree::nextImpl(void *&pointer) const {
+    Node *current = (Node*)pointer;
+
+    if(current) {
+        if(current->right != NIL) {
+            current = current->right;
+
+            while(current->left != NIL)
+                current = current->left;
+        } else {
+
+            if(current->parent != 0) {
+                if(current->parent->left == current)
+                    current = current->parent;
+                else {
+                    while(current->parent && current->parent->left != current) {
+                        current =  current->parent;
+                        if(current->parent == 0) {
+                            current = 0;
+                            pointer = (void*)current;
+                            return;
+                        }
+                    }
+                    if(current != 0)
+                        current =  current->parent;
+                }
+            } else current = 0;
+        }
+        pointer = (void*)current;
+    }
+}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
@@ -354,11 +419,15 @@ void RedBlackTree::show() {
         std::cout<<"EMPTY o_O\n";
 }
 
-void RedBlackTree::clear() {
-    postOrder(root,remove);
+void RedBlackTree::clearImpl() {
+    if(root != NIL) {
+        postOrder(root,remove);
+        root = NIL;
+    }
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
 
 void RedBlackTree::inOrder(Node *node, void (*function)(Node *node, int level), int &level) {
     if (node->right != NIL) {
@@ -399,4 +468,3 @@ void RedBlackTree::remove(Node *node) {
     delete node;
     node =0;
 }
-
