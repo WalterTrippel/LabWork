@@ -60,7 +60,7 @@ public:
     bool operator!=(const TreeIterator &right) const {
         return !(*this == right);
     }
-    //  private:
+private:
     const Tree *owner;
     void *current;
 
