@@ -1,3 +1,5 @@
+/* У меня нет компилятора Java, за работостпособность кода не отвечаю D: */
+
 public class BST{
 
    private Node root;
